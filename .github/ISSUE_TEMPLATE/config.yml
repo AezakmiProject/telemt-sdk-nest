@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Telemt server issues
+    url: https://github.com/telemt/telemt/issues
+    about: Bugs in Telemt itself belong upstream, not in this module
+  - name: SDK issues
+    url: https://github.com/AezakmiProject/telemt-sdk/issues
+    about: Wrong types, endpoints, or error codes belong in telemt-sdk, not here

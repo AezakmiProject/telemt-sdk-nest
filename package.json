@@ -1,9 +1,22 @@
 {
-  "name": "telemt-sdk-nest",
+  "name": "@aezakmiproject/telemt-sdk-nest",
   "version": "1.0.0",
-  "description": "NestJS module for the Telemt MTProto proxy Control API — injectable typed client, sync and async registration, no-throw responses, Node 18+",
+  "description": "NestJS module for the Telemt MTProto proxy Control API: injectable typed client, sync and async registration, no-throw responses, Node 22+",
+  "homepage": "https://github.com/AezakmiProject/telemt-sdk-nest#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AezakmiProject/telemt-sdk-nest.git"
+  },
+  "bugs": {
+    "url": "https://github.com/AezakmiProject/telemt-sdk-nest/issues"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
@@ -37,7 +50,12 @@
   ],
   "author": "ABRAMOVI4CH",
   "license": "ISC",
+  "engines": {
+    "node": ">=22.12"
+  },
+  "packageManager": "pnpm@9.15.9",
   "devDependencies": {
+    "@aezakmiproject/telemt-sdk": "^1.2.0",
     "@nestjs/common": "^12.0.1",
     "@nestjs/core": "^12.0.1",
     "@nestjs/testing": "^12.0.1",
@@ -48,7 +66,9 @@
     "typescript": "^7.0.2",
     "vitest": "^5.0.0"
   },
-  "dependencies": {
-    "@aezakmiproject/telemt-sdk": "^1.2.0"
+  "peerDependencies": {
+    "@aezakmiproject/telemt-sdk": "^1.2.0",
+    "@nestjs/common": "^12.0.0",
+    "reflect-metadata": "^0.2.0"
   }
 }

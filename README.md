@@ -1,4 +1,4 @@
-# telemt-sdk-nest
+# @aezakmiproject/telemt-sdk-nest
 
 [![License: ISC](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](package.json)
@@ -14,9 +14,9 @@ This project is an independent open-source client. It is not affiliated with Tel
 ## Install
 
 ```bash
-npm install telemt-sdk-nest
+npm install @aezakmiproject/telemt-sdk-nest
 # or
-pnpm add telemt-sdk-nest
+pnpm add @aezakmiproject/telemt-sdk-nest
 ```
 
 `@nestjs/common` and `@nestjs/core` are expected to be present in the host application.
@@ -27,7 +27,7 @@ Register the module once, then inject `TelemtService` anywhere.
 
 ```ts
 import { Module } from '@nestjs/common';
-import { TelemtModule } from 'telemt-sdk-nest';
+import { TelemtModule } from '@aezakmiproject/telemt-sdk-nest';
 
 @Module({
   imports: [
@@ -42,7 +42,7 @@ export class AppModule {}
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import { TelemtService } from 'telemt-sdk-nest';
+import { TelemtService } from '@aezakmiproject/telemt-sdk-nest';
 
 @Injectable()
 export class UsersReport {
@@ -65,7 +65,7 @@ Use `forRootAsync` when the options come from config, a secret store, or anythin
 
 ```ts
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TelemtModule } from 'telemt-sdk-nest';
+import { TelemtModule } from '@aezakmiproject/telemt-sdk-nest';
 
 TelemtModule.forRootAsync({
   imports: [ConfigModule],
@@ -87,7 +87,7 @@ import {
   TelemtModule,
   type TelemtModuleOptions,
   type TelemtOptionsFactory,
-} from 'telemt-sdk-nest';
+} from '@aezakmiproject/telemt-sdk-nest';
 
 @Injectable()
 export class TelemtConfig implements TelemtOptionsFactory {

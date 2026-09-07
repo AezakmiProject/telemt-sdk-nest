@@ -1,0 +1,67 @@
+name: Bug report
+description: Something in @aezakmiproject/telemt-sdk-nest does not wire up or behave as documented
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This package is a NestJS wrapper. If the request reaches Telemt and the
+        response or its types are wrong, the issue belongs in
+        [telemt-sdk](https://github.com/AezakmiProject/telemt-sdk/issues); if
+        Telemt itself misbehaves, in [telemt/telemt](https://github.com/telemt/telemt).
+        Do not report security issues here.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: Actual behaviour vs what you expected.
+    validations:
+      required: true
+  - type: dropdown
+    id: registration
+    attributes:
+      label: How is the module registered?
+      options:
+        - forRoot
+        - forRootAsync + useFactory
+        - forRootAsync + useClass
+        - forRootAsync + useExisting
+    validations:
+      required: true
+  - type: input
+    id: pkg
+    attributes:
+      label: "@aezakmiproject/telemt-sdk-nest version"
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: nest
+    attributes:
+      label: "@nestjs/common version"
+      placeholder: "12.0.1"
+    validations:
+      required: true
+  - type: input
+    id: sdk
+    attributes:
+      label: "@aezakmiproject/telemt-sdk version"
+      placeholder: "1.2.0"
+  - type: input
+    id: node
+    attributes:
+      label: Node.js version
+      placeholder: "22"
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Minimal module + injecting service. Redact secrets — never paste `auth`.
+      render: ts
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Extra context
+      description: Nest DI error, envelope JSON, `TelemtApiException.code`, anything else (redact secrets).

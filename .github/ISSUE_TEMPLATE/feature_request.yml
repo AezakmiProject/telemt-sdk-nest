@@ -1,0 +1,29 @@
+name: Feature request
+description: New provider, registration option, or helper in the NestJS module
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Requests for new Telemt endpoints or types belong in
+        [telemt-sdk](https://github.com/AezakmiProject/telemt-sdk/issues).
+        This repo covers only the Nest wiring around it.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What can you not do with the current module?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Provider/token shape, registration surface, and how it composes with existing DI.
+    validations:
+      required: true
+  - type: input
+    id: sdk
+    attributes:
+      label: SDK version this depends on
+      placeholder: "1.2.0"

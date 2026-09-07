@@ -18,8 +18,40 @@ emits extensionless relative imports that Node's ESM resolver rejects) out of th
 service's runtime graph.
 
 ## 2026-09-07 — Spec typechecking split into `tsconfig.spec.json`
-`tsconfig.json` still sets `moduleResolution: node10`, which TS 7 removed, so `tsc`
-fails before it reaches the specs. `tsconfig.spec.json` overrides resolution to
-`bundler` (matching how vitest resolves at run time) for typechecking only, leaving
-the published build output untouched. **Open:** `pnpm build` remains broken until
-the base config is migrated off `node10`.
+The base config excludes `**/*.spec.ts` so specs stay out of `dist/`.
+`tsconfig.spec.json` adds them back under `noEmit` for typechecking. Since the base
+config moved to `nodenext` it needs no resolution overrides — it only flips `noEmit`.
+
+## 2026-09-07 — Stay CommonJS; `module: nodenext`, Node >=22.12
+`moduleResolution: node10` was removed in TS 7, and it had been masking a real
+mismatch: this package emits CommonJS but `@nestjs/common@12` is pure ESM
+(`"type": "module"`, no CJS build, no conditional exports).
+
+Of `node16` / `node18` / `nodenext`, only **`nodenext`** typechecks cleanly — it is
+the mode in which TypeScript models Node's `require(esm)` support instead of
+rejecting it outright (`node16` reports TS1479; `node18` is not a valid
+`moduleResolution`). Output stays CommonJS because `package.json` has no
+`"type": "module"`.
+
+`require(esm)` is unflagged only from Node 22.12, so `engines` is `>=22.12` rather
+than the `>=18` inherited from the SDK. Verified by loading the built `dist/` into a
+real Nest DI container against the unmocked SDK.
+
+**ESM was considered and rejected.** Going `"type": "module"` would resolve
+`@aezakmiproject/telemt-sdk` through its `import` condition to `dist/esm`, whose
+relative imports carry no file extensions — Node rejects that with
+`ERR_MODULE_NOT_FOUND`. Its `tsconfig.esm.json` builds with
+`moduleResolution: "bundler"`, which permits extensionless specifiers and emits them
+verbatim into a directory published as real Node ESM. The CJS half is unaffected, so
+requiring the SDK works. Revisit if that build is fixed upstream.
+
+## 2026-09-07 — Every runtime dependency is a peer; `dependencies` is empty
+`@aezakmiproject/telemt-sdk` moved from `dependencies` to `peerDependencies` (kept in
+`devDependencies` for local builds), joining `@nestjs/common` and `reflect-metadata`.
+The consumer owns the SDK version, and a single client instance is shared rather than
+this wrapper pinning a second copy of the SDK into their tree.
+
+Peers were chosen from what the built output actually loads, not by convention:
+`dist/` requires only `@nestjs/common` and the SDK, and the emitted decorator
+metadata calls `Reflect.metadata`. `@nestjs/core` is imported nowhere in `src/` and
+stays a devDependency, pulled in only as a peer of `@nestjs/testing`.

@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2021",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "ignoreDeprecations": "6.0",
-    "lib": ["ES2021"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "lib": [
+      "ES2021"
+    ],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -18,6 +19,12 @@
     "emitDecoratorMetadata": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts"
+  ]
 }
