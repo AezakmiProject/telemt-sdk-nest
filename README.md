@@ -7,19 +7,30 @@ NestJS module for the [Telemt](https://github.com/telemt/telemt) Control API.
 
 Wraps [`@aezakmiproject/telemt-sdk`](https://www.npmjs.com/package/@aezakmiproject/telemt-sdk) in an injectable provider: one configured `TelemtAPI` per registration, resolved through Nest DI, with sync and async registration and an opt-in helper that turns the SDK's no-throw envelope into a thrown exception.
 
-Requires **Node.js 18+** (the SDK uses global `fetch` and `AbortSignal.timeout`).
+Requires **Node.js 22.12+**. `@nestjs/common` v12 is ESM-only while this package is published as CommonJS, so it relies on `require(esm)`, which is unflagged only from that version.
 
 This project is an independent open-source client. It is not affiliated with Telegram or the Telemt authors.
 
 ## Install
 
+This package declares its runtime dependencies as peers, so install the SDK alongside it:
+
 ```bash
-npm install @aezakmiproject/telemt-sdk-nest
+npm install @aezakmiproject/telemt-sdk-nest @aezakmiproject/telemt-sdk
 # or
-pnpm add @aezakmiproject/telemt-sdk-nest
+pnpm add @aezakmiproject/telemt-sdk-nest @aezakmiproject/telemt-sdk
 ```
 
-`@nestjs/common` and `@nestjs/core` are expected to be present in the host application.
+The full peer set is:
+
+| Peer | Range | Notes |
+| --- | --- | --- |
+| `@aezakmiproject/telemt-sdk` | `^1.2.0` | The client this module wraps — install it explicitly |
+| `@nestjs/common` | `^12.0.0` | Already present in any Nest application |
+| `reflect-metadata` | `^0.2.0` | Already present in any Nest application |
+
+Keeping the SDK a peer means your application owns its version, and the module does
+not pin a second copy of the client into your tree.
 
 ## Quick start
 
