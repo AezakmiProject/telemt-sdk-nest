@@ -137,8 +137,12 @@ Thin, stateless facade over the underlying `TelemtAPI`. Each getter forwards to 
 | `runtime` | Gates, ME pool/quality, events, TLS fingerprints |
 | `security` | API posture and IP whitelist |
 | `limits` | Effective timeouts / pool / per-user limits |
+| `web` | WEB-proxy session control — **requires Telemt 3.5.1+** |
 | `client` | The raw `TelemtAPI`, for anything not surfaced above |
 | `unwrap(res)` | Returns `data`, or throws `TelemtApiException` |
+
+`web` is version-gated: on a Telemt older than 3.5.1 its calls come back as a failed
+`ISdkResponse` rather than throwing, like every other SDK call.
 
 The full method list and request/response types live in the [SDK's API reference](https://github.com/AezakmiProject/telemt-sdk/blob/main/docs/api.md).
 
@@ -191,8 +195,6 @@ A `202` from a user mutation is still `isOk: true` — the write is on disk, but
 ## Scope
 
 Each registration builds its own client, so registering the module in two places gives two independent `TelemtAPI` instances. The module is **not** global: every consuming module must import it, and only `TelemtService` is exported — `TELEMT_CLIENT` and `TELEMT_MODULE_OPTIONS` stay internal to the module.
-
-WEB-proxy session control (`api.web`) is not implemented in the SDK, so it is deliberately not surfaced here.
 
 ## Development
 

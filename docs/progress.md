@@ -21,10 +21,15 @@
       SDK, a real dependency), and the emitted decorator metadata calls
       `Reflect.metadata`. `@nestjs/core` is imported nowhere in `src/`, so it stays a
       devDependency, pulled in only by `@nestjs/testing`.
+- [x] `TelemtService.web` getter added — `WebService` is implemented in the SDK
+      despite its README claiming otherwise. 44 specs now.
 - [x] `@aezakmiproject/telemt-sdk` moved to `peerDependencies` + `devDependencies`;
       `dependencies` is now empty. Dependency audit run — see docs/decisions.md.
 
 ## Open
+- [ ] `@aezakmiproject/telemt-sdk`'s README (line 61) still says `api.web` is "not
+      implemented yet". It is: `WebService` has 8 working methods gated at Telemt
+      3.5.1. Stale line worth fixing in the SDK repo.
 - [ ] `@aezakmiproject/telemt-sdk`'s published ESM build is unimportable from Node
       (`ERR_MODULE_NOT_FOUND`: extensionless relative imports in `dist/esm`). Only the
       CJS half works, which is why this package stays CommonJS. Fix lives in the SDK

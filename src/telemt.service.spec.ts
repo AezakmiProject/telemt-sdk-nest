@@ -16,6 +16,7 @@ const SERVICE_GETTERS = [
   'runtime',
   'security',
   'limits',
+  'web',
 ] as const;
 
 function createApiStub() {

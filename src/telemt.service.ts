@@ -43,6 +43,11 @@ export class TelemtService {
     return this.api.limits;
   }
 
+  /** Version-gated: requires Telemt 3.5.1+, see `WebService.MIN_VERSION`. */
+  get web() {
+    return this.api.web;
+  }
+
   async unwrap<T>(response: Promise<ISdkResponse<T>> | ISdkResponse<T>): Promise<T> {
     const res = await response;
     if (!res.isOk) {
