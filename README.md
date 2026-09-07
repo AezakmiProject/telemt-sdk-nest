@@ -1,7 +1,7 @@
 # @aezakmiproject/telemt-sdk-nest
 
 [![License: ISC](https://img.shields.io/badge/license-ISC-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D18-brightgreen.svg)](package.json)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D22-brightgreen.svg)](package.json)
 
 NestJS module for the [Telemt](https://github.com/telemt/telemt) Control API.
 
